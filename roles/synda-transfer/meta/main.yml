@@ -1,0 +1,12 @@
+dependencies:
+  - role: uchida.miniconda
+    miniconda_env:
+      name: "{{ miniconda_env_name }}" 
+      channels:
+        - santandermeteorologygroup
+        - conda-forge
+        - defaults
+      dependencies:
+        - python=2
+        - synda-transfer
+        - jq

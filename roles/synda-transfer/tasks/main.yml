@@ -1,0 +1,15 @@
+- name: Set ST_HOME
+  replace:
+    path: "{{ miniconda_prefix }}/envs/{{ miniconda_env_name }}/etc/conda/activate.d/synda-transfer.sh"
+    regexp: export ST_HOME=.*
+    replace: export ST_HOME={{ st_home }}
+
+- name: Create synda dirs in ST_HOME
+  file: state=directory dest={{ st_home }}/{{ item }}
+  with_items: [bin, conf, data, db, selection]
+
+- name: Template sdt.conf
+  template: src=sdt.conf.j2 dest="{{ st_home }}/conf/sdt.conf"
+
+- name: Template credentials.conf
+  template: src=credentials.conf.j2 dest="{{ st_home }}/conf/credentials.conf" mode=0500

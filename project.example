@@ -1,0 +1,5 @@
+openid: https://esgf-data.dkrz.de/esgf-idp/openid/foo
+password: ********
+db: /path/to/project/{{ project }}/db
+data: /path/to/project/{{ project }}/data
+selection: /path/to/project/{{ project }}/selection

@@ -1,0 +1,4 @@
+miniconda_env_name: synda-transfer
+st_home: "{{ miniconda_prefix }}/envs/{{ miniconda_env_name }}"
+db: "{{ st_home }}/db"
+data: "{{ st_home }}/data"

@@ -1,0 +1,25 @@
+- name: Create new synda production synda environment
+  hosts: ui
+  vars:
+    miniconda_version: latest
+    miniconda_prefix: "{{ ansible_env.HOME }}/syndas"
+  vars_files:
+    - {{ project }}
+  roles:
+    - role: synda-transfer
+  tasks:
+    - name: Fix unknown bug
+      replace:
+        path: "{{ miniconda_prefix }}/envs/{{ miniconda_env_name }}/lib/sd/sddao.py"
+        regexp: 'def add_parameter_value.*\n.*conn.execute.*\n.*\n.*\n.*\n'
+        replace: |
+          def add_parameter_value(name,value,commit=True,conn=sddb.conn):
+              if value != 'regular 1/2? lat-lon grid':
+                  conn.execute("insert into param (name,value) values (?,?)",(name,value))
+                  if commit:
+                      conn.commit()
+
+    - name: Avoid asserts
+      copy:
+        src: sdevent.py
+        dest: "{{ miniconda_prefix }}/envs/{{ miniconda_env_name }}/lib/sd/sdevent.py"
