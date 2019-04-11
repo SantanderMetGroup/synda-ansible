@@ -1,8 +1,6 @@
 # Usage
 
-See main.yml and project.example
-
 ```bash
-ansible-galaxy install uchida.miniconda
-ansible-playbook main.yml -e project=cmip5-esm-subset
+ansible-galaxy install -r requirements.yml
+ansible-playbook main.yml -e dataset="/oceano/gmeteo/WORK/zequi/DATASETS/cmip5-esm-subset" -e openid="OPENID" -e password="PASSWORD"
 ```

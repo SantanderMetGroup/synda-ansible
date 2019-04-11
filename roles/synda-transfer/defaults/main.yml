@@ -1,4 +1,5 @@
-miniconda_env_name: synda-transfer
+miniconda_env_name: "{{ dataset|basename }}"
 st_home: "{{ miniconda_prefix }}/envs/{{ miniconda_env_name }}"
-db: "{{ st_home }}/db"
-data: "{{ st_home }}/data"
+db: "{{ dataset|default(st_home) }}/db"
+data: "{{ dataset|default(st_home) }}/data"
+selection: "{{ dataset|default(st_home) }}/selection"
