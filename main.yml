@@ -3,5 +3,11 @@
   vars:
     miniconda_version: latest
     miniconda_prefix: "{{ ansible_env.HOME }}/syndas"
+
+    # demo
+    openid: https://esgf-data.dkrz.de/esgf-idp/openid/zequi
+    dataset: /oceano/gmeteo/WORK/zequi/DATASETS/demo
+  vars_files:
+    - demo.yml
   roles:
     - role: esgf-replication
