@@ -4,9 +4,12 @@
     regexp: export ST_HOME=.*
     replace: export ST_HOME={{ st_home }}
 
-- name: Create synda dirs in ST_HOME
-  file: state=directory dest={{ st_home }}/{{ item }}
-  with_items: [data, db, selection]
+- name: Create dataset directory
+  file: state=directory dest={{ dataset }}
+
+- name: Create synda dirs in {{ dataset }}
+  file: state=directory dest={{ item }}
+  with_items: ["{{ data }}", "{{ db }}", "{{ selection }}"]
 
 - name: Template sdt.conf
   template: src=sdt.conf.j2 dest={{ st_home }}/conf/sdt.conf
